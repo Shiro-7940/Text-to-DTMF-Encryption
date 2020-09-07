@@ -6,8 +6,8 @@ Generated file name will end with "_encoded.wav"
 
 Considering the speed and reliability, the default duration and pause is 100ms and 10ms respectively.
 ## Tip:
-If you change the `"ascii"` at line 41 and 289 in `"opentone\__init__.py"` 
-to `"utf-8"`, it would work with any character.
+If you change the `"ascii"` at line 41 and 289 in `"opentone\__init__.py"` to `"utf-8"`, it would work with any character.
+* There are two .wav files that you can try to decode to see if it is working.
 ## Examples of running the script:
 ```
 [evaluate Text-to-DTMF-Encryption.py]
