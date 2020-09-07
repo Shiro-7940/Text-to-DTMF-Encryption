@@ -47,24 +47,43 @@ if select_m == "1":
         print(error_hint)
 
 elif select_m == "2": 
-    try:
-        print("-----DTMF TEXT DECODER-----")
-        de_file_name= input("Enter file name (with .wav) that you want to decode: ")
-        print("-----Decoding...-----")
-        decoder = ToneDecoder()
-        decoded_text = decoder.decode_wave(de_file_name)
-        print("---Result---")
-        print(decoded_text)
-        #print("Decoded data copied to clipboard. The lenth of the decoded data is "+str(len(decoded_text))+".")
-        #pyperclip.copy(decoded_text)      
-        print("If it makes sense, it's probably a success.")
-    except Exception as error:
-        print("Error: "+ str(error)) 
-        print(error_hint)    
+    select_hex = input("-----File Type----- \n1 = TEXT   \n2 = NUMBER (Experimental) \n: ")
+    if select_hex == "1":
+        try:
+            print("-----DTMF TEXT DECODER-----")
+            de_file_name= input("Enter file name (with .wav) that you want to decode: ")
+            print("-----Decoding...-----")
+            decoder = ToneDecoder()
+            decoded_text = decoder.decode_wave(de_file_name)
+            print("---Result---")
+            print(decoded_text)
+            #print("Decoded data copied to clipboard. The lenth of the decoded data is "+str(len(decoded_text))+".")
+            #pyperclip.copy(decoded_text)      
+            print("If it makes sense, it's probably a success.")
+        except Exception as error:
+            print("Error: "+ str(error)) 
+            print(error_hint)  
+    elif select_hex == "2":
+        try:
+            print("-----Experimental Features-----")
+            goertzel_N = int(input("Input goertzel_N (recommend 92): "))
+            min_consecutive= int(input("Input min_consecutive (recommend 2 to 8): "))
+            print("-----DTMF NUMBER DECODER-----")
+            de_file_name= input("Enter file name (with .wav) that you want to decode: ")
+            print("-----Decoding...-----")
+            decoder = ToneDecoder(8000, goertzel_N, min_consecutive, hex_decode=False)
+            decoded_text = decoder.decode_wave(de_file_name)
+            decoded_text = decoded_text.lower().replace("e", "*").replace("f", "#")
+            print("---Result---")
+            print(decoded_text)
+            #print("Decoded data copied to clipboard. The lenth of the decoded data is "+str(len(decoded_text))+".")
+            #pyperclip.copy(decoded_text)      
+            print("If it makes sense, it's probably a success.")
+        except Exception as error:
+            print("Error: "+ str(error)) 
+            print(error_hint)  
+    else:
+        print("Invalid input")            
 else:
     print("Invalid input")
-
-
-
-
 
